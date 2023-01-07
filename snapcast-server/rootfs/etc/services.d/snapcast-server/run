@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the example service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+config=/etc/snapserver.conf
+
+until [ -e /run/avahi-daemon/pid ]; do
+  sleep 1s
+done
+
+bashio::log.info "Starting snapcast server..."
+
+# Use the log level if set
+if bashio::config.has_value "log_level"; then
+    bashio::log.info "Setting log level to '$(bashio::config 'log_level')'"
+    bashio::log.level "$(bashio::config 'log_level')"
+fi
+
+bashio::log.debug "Config: $(bashio::addon.config)"
+
+echo "[stream]" > "${config}"
+for stream in $(bashio::config 'streams.streams'); do
+    echo "stream = ${stream}" >> "${config}"
+done
+
+# Add the spotifyd named pipe source
+echo "stream = pipe:///usr/share/librespot?name=Spotify" >> "${config}"
+
+{
+    echo "buffer = $(bashio::config 'buffer')"
+    echo "codec = $(bashio::config 'codec')"
+    echo "send_to_muted = $(bashio::config 'send_to_muted')"
+    echo "sampleformat = $(bashio::config 'sampleformat')"
+ } >> "${config}"
+
+## Run snapserver program
+/usr/bin/snapserver -c /etc/snapserver.conf

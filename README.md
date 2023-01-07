@@ -6,7 +6,7 @@
 
 This repository contains the following add-ons
 
-### [Snapcast-server add-on with Spotify connect support](./example)
+### [Snapcast-server add-on with Spotify connect support](./snapcast-server)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]

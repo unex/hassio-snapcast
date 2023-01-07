@@ -1,4 +1,26 @@
 configuration:
-  message:
-    name: Message
-    description: The message that will be printed to the log when starting this example add-on.
+  streams:
+    name: Streams
+    description: The streams that can be selected as input. See https://github.com/badaix/snapcast/blob/master/doc/configuration.md on how to format them.
+  buffer:
+    name: Buffer
+  codec:
+    name: Codec
+    description: Codec to use for streaming to snapcast clients.
+  send_to_muted:
+    name: Send to muted clients
+  sampleformat:
+    name: Sample format
+  spotify_name:
+    name: Spotify device name
+    description: The name of the device as shown in Spotify
+  spotify_username:
+    name: Spotify username
+  spotify_password:
+    name: Spotify password
+  log_level:
+    name: Log level
+network:
+  1704/tcp: Snapcast client connections.
+  1705/tcp: Snapcast's control interface.
+  1780/tcp: Websocket connections to snapcast server.

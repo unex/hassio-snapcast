@@ -35,7 +35,7 @@ schema:
   streams:
     streams: ["str"]
   buffer: int
-  codec: str
+  codec: list(pcm|flac|vorbis|opus)
   send_to_muted: bool
   sampleformat: str
   spotify_name: str

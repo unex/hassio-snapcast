@@ -8,6 +8,6 @@ until [ -e /var/run/dbus/system_bus_socket ]; do
   sleep 1s
 done
 
-bashio::log.info "Starting avahi-daemon client..."
+bashio::log.info "Starting avahi-daemon..."
 
 avahi-daemon --no-drop-root -f /etc/avahi/avahi-daemon.conf

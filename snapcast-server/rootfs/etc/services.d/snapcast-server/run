@@ -25,8 +25,19 @@ for stream in $(bashio::config 'streams.streams'); do
     echo "stream = ${stream}" >> "${config}"
 done
 
-# Add the spotifyd named pipe source
-echo "stream = pipe:///usr/share/librespot?name=Spotify" >> "${config}"
+# Add the Spotify source
+device_name=$(bashio::config 'spotify_name')
+spotify_auth=""
+if bashio::config.has_value 'spotify_username'; then
+    bashio::config.require.spotify_password
+
+    username=$(bashio::config 'spotify_username')
+    password=$(bashio::config 'spotify_password')
+
+    spotify_auth="&username=${username}&password=${password}"
+fi
+
+echo "stream = librespot:///usr/bin/librespot?name=Spotify&devicename=${device_name}${spotify_auth}&disable_audio_cache=true" >> "${config}"
 
 {
     echo "buffer = $(bashio::config 'buffer')"

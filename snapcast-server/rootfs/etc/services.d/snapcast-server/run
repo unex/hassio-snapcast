@@ -29,7 +29,7 @@ done
 device_name=$(bashio::config 'spotify_name')
 spotify_auth=""
 if bashio::config.has_value 'spotify_username'; then
-    bashio::config.require.spotify_password
+    bashio::config.require 'spotify_password'
 
     username=$(bashio::config 'spotify_username')
     password=$(bashio::config 'spotify_password')

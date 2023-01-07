@@ -20,7 +20,3 @@ configuration:
     name: Spotify password
   log_level:
     name: Log level
-network:
-  1704/tcp: Snapcast client connections.
-  1705/tcp: Snapcast's control interface.
-  1780/tcp: Websocket connections to snapcast server.

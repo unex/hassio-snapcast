@@ -2,7 +2,7 @@
 name: Snapcast server
 version: "0.0.1"
 slug: snapcast-server
-description: Snapcast server with librespot support
+description: Snapcast server with Spotify connect support
 url: "https://github.com/corneyl/hassio-addons/tree/main/snapcast-server"
 # audio: true
 host_network: true
@@ -22,9 +22,9 @@ ports:
   1705/tcp: 1705
   1780/tcp: 1780
 ports_description:
-  1704/tcp: Snapcast client connections.
-  1705/tcp: Snapcast's control interface.
-  1780/tcp: Websocket connections to snapcast server.
+  1704/tcp: Snapcast client connections
+  1705/tcp: Snapcast's control interface
+  1780/tcp: Websocket connections to snapcast server
 options:
   streams:
     streams: []

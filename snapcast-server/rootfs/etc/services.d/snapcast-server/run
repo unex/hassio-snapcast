@@ -37,14 +37,23 @@ if bashio::config.has_value 'spotify_username'; then
     spotify_auth="&username=${username}&password=${password}"
 fi
 
-echo "stream = librespot:///usr/bin/librespot?name=Spotify&devicename=${device_name}${spotify_auth}&disable_audio_cache=true" >> "${config}"
-
 {
+    echo "stream = librespot:///usr/bin/librespot?name=Spotify&devicename=${device_name}${spotify_auth}&disable_audio_cache=true"
     echo "buffer = $(bashio::config 'buffer')"
     echo "codec = $(bashio::config 'codec')"
     echo "send_to_muted = $(bashio::config 'send_to_muted')"
     echo "sampleformat = $(bashio::config 'sampleformat')"
- } >> "${config}"
+    echo "[http]"
+    echo "doc_root = /usr/share/snapserver/snapweb"
+} >> "${config}"
+
+# Configure snapweb
+cat <<EOT > /usr/share/snapserver/snapweb/config.js
+"use strict";
+let config = {
+    baseUrl: (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + window.location.pathname.replace(/\/$/, '')
+}
+EOT
 
 ## Run snapserver program
 /usr/bin/snapserver -c /etc/snapserver.conf

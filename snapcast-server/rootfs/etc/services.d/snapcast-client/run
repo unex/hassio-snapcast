@@ -4,6 +4,13 @@
 # s6-overlay docs: https://github.com/just-containers/s6-overlay
 # ==============================================================================
 
+until [ -e /run/avahi-daemon/pid ]; do
+  sleep 1s
+done
+
+# Wait for snapcast-server to start
+sleep 5s
+
 bashio::log.info "Starting snapcast client..."
 
-/usr/bin/snapclient --host localhost --hostID home-assistant
+/usr/bin/snapclient --host 127.0.0.1 --hostID home-assistant

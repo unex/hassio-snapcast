@@ -27,7 +27,7 @@ done
 # Add DLNA Media Renderer source
 device_name=$(bashio::config 'renderer_name')
 {
-    echo "source = pipe:///share/snapfifo?mode=create&name=DLNA&devicename=${device_name}&disable_audio_cache=true"
+    echo "source = pipe:///share/snapfifo?mode=create&name=DLNA&devicename="${device_name}"&disable_audio_cache=true&sampleformat=48000:16:2"
 } >> "${config}"
 
 # Add the Spotify source
@@ -43,7 +43,7 @@ if bashio::config.has_value 'spotify_username'; then
 fi
 
 {
-    echo "source = librespot:///usr/bin/librespot?name=Spotify&devicename=${device_name}${spotify_auth}&disable_audio_cache=true"
+    echo "source = librespot:///usr/bin/librespot?name=Spotify&devicename="${device_name}"${spotify_auth}&disable_audio_cache=true"
     echo "buffer = $(bashio::config 'buffer')"
     echo "codec = $(bashio::config 'codec')"
     echo "send_to_muted = $(bashio::config 'send_to_muted')"

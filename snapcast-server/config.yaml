@@ -54,4 +54,4 @@ schema:
   spotify_username: str?
   spotify_password: password?
   log_level: list(trace|debug|info|notice|warning|error|fatal)
-#image: "ghcr.io/corneyl/{arch}-snapcast-server"
+image: "ghcr.io/DjFabFab/{arch}-snapcast-server"

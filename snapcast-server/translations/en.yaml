@@ -18,5 +18,7 @@ configuration:
     name: Spotify username
   spotify_password:
     name: Spotify password
+  renderer_name:
+    name: DLNA Renderer device name
   log_level:
     name: Log level

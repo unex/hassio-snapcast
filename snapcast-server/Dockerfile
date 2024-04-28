@@ -11,6 +11,13 @@ RUN \
         protobuf-dev=3.21.9-r0 \
         pulseaudio-dev=16.1-r6 \
         avahi-dev=0.8-r6 \
+        autoconf \
+        automake \
+        libtool \
+        pkgconf \  
+        gcc \
+        g++ \
+        make \
     \
     && apk add --no-cache \
         dbus=1.14.4-r0 \
@@ -20,6 +27,21 @@ RUN \
         pulseaudio=16.1-r6 \
         alsa-plugins-pulse=1.2.7.1-r0 \
 		snapcast=0.26.0-r3 \
+        alsa-utils \
+        alsa-utils-doc \
+        alsa-lib \
+        alsaconf \
+        alsa-ucm-conf \
+        libupnp-dev \
+        libnice-gstreamer \
+        gst-plugins-base \
+        gst-plugins-ugly \
+        gst-plugins-good \
+        gst-plugins-bad \
+        gst-plugins-good-gtk \
+        gst-libav \
+        gstreamer-dev \
+        gstreamer-tools \
     \
     && cargo install \
         --locked \
@@ -30,6 +52,18 @@ RUN \
         --version 0.4.2 \
         --verbose \
         -- librespot \
+    \
+    && git clone \
+    https://github.com/hzeller/gmrender-resurrect.git \
+    \
+    && mkdir -p /gmrender-resurrect \
+    && mv upnp_renderer.c /gmrender-resurrect/src \
+    && cd /gmrender-resurrect \
+    && ./autogen.sh \
+    && ./configure \
+    && automake \
+    && make \
+    && make install \
     \
     && apk del --no-cache --purge .build-dependencies \
     && rm -fr \

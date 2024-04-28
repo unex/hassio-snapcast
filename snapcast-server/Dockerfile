@@ -53,6 +53,8 @@ RUN \
         --verbose \
         -- librespot
 RUN \
+        addgroup root audio
+RUN \
 	git clone https://github.com/hzeller/gmrender-resurrect.git \
 	&& mkdir -p /gmrender-resurrect \
 	&& cd /gmrender-resurrect \
@@ -70,8 +72,8 @@ RUN \
 	        /usr/.crates2.json \
                 /gmrender-resurrect
 RUN \
-        mkdir -p /var/run/dbus  \
-        && touch /var/run/dbus/system_bus_socket
+        mkdir -p /var/run/dbus
+        # && touch /var/run/dbus/system_bus_socket
 
 # Copy root filesystem
 COPY rootfs /

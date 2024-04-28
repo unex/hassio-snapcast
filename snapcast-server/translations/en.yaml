@@ -4,6 +4,8 @@ configuration:
     description: The streams that can be selected as input. See https://github.com/badaix/snapcast/blob/master/doc/configuration.md on how to format them.
   buffer:
     name: Buffer
+  chunk_ms:
+    name: Default source stream read chunk size [ms].
   codec:
     name: Codec
     description: Codec to use for streaming to snapcast clients.

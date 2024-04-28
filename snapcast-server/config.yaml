@@ -36,6 +36,7 @@ options:
   streams:
     streams: []
   buffer: 1000
+  chunk_ms: 20
   codec: flac
   send_to_muted: false
   sampleformat: "48000:16:2"
@@ -47,6 +48,7 @@ schema:
   streams:
     streams: ["str"]
   buffer: int
+  chunk_ms: int
   codec: list(pcm|flac|vorbis|opus)
   renderer_name: str
   send_to_muted: bool

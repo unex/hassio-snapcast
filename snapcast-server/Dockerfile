@@ -67,7 +67,11 @@ RUN \
 		/tmp/* \
 		~/.cargo \
 	        /usr/.crates.toml \
-	        /usr/.crates2.json
+	        /usr/.crates2.json \
+                /gmrender-resurrect
+RUN \
+        mkdir -p /var/run/dbus  \
+        && touch /var/run/dbus/system_bus_socket
 
 # Copy root filesystem
 COPY rootfs /

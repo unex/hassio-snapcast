@@ -1,32 +1,32 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:13.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.3
 FROM $BUILD_FROM
 
 # See https://github.com/librespot-org/librespot/wiki/Compiling#addition-features for librespot compile features.
 RUN \
 	apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r3 \
-        cargo=1.64.0-r2 \
-        git=2.38.3-r1 \
-        protobuf-dev=3.21.9-r0 \
-        pulseaudio-dev=16.1-r6 \
-        avahi-dev=0.8-r6 \
+        build-base \
+        cargo \
+        git \
+        protobuf-dev \
+        pulseaudio-dev \
+        avahi-dev \
         autoconf \
         automake \
         libtool \
         pkgconf \  
         gcc \
         g++ \
-        make \
-    \
-    && apk add --no-cache \
-        dbus=1.14.4-r0 \
-        nss=3.85-r0 \
-        avahi-compat-libdns_sd=0.8-r6 \
-        avahi=0.8-r6 \
-        pulseaudio=16.1-r6 \
-        alsa-plugins-pulse=1.2.7.1-r0 \
-		snapcast=0.26.0-r3 \
+        make
+RUN \
+	apk add --no-cache \
+        dbus \
+        nss \
+        avahi-compat-libdns_sd \
+        avahi \
+        pulseaudio \
+        alsa-plugins-pulse \
+	    snapcast \
         alsa-utils \
         alsa-utils-doc \
         alsa-lib \
@@ -41,9 +41,9 @@ RUN \
         gst-plugins-good-gtk \
         gst-libav \
         gstreamer-dev \
-        gstreamer-tools \
-    \
-    && cargo install \
+        gstreamer-tools
+RUN \
+	cargo install \
         --locked \
         --no-default-features \
         --features with-dns-sd \
@@ -51,26 +51,23 @@ RUN \
         --bin librespot \
         --version 0.4.2 \
         --verbose \
-        -- librespot \
-    \
-    && git clone \
-    https://github.com/hzeller/gmrender-resurrect.git \
-    \
-    && mkdir -p /gmrender-resurrect \
-    && mv upnp_renderer.c /gmrender-resurrect/src \
-    && cd /gmrender-resurrect \
-    && ./autogen.sh \
-    && ./configure \
-    && automake \
-    && make \
-    && make install \
-    \
-    && apk del --no-cache --purge .build-dependencies \
-    && rm -fr \
-        /tmp/* \
-        ~/.cargo \
-        /usr/.crates.toml \
-        /usr/.crates2.json
+        -- librespot
+RUN \
+	git clone https://github.com/hzeller/gmrender-resurrect.git \
+	&& mkdir -p /gmrender-resurrect \
+	&& cd /gmrender-resurrect \
+	&& ./autogen.sh \
+	&& ./configure \
+	&& automake \
+	&& make \
+	&& make install
+RUN \
+	apk del --no-cache --purge .build-dependencies \
+	&& rm -fr \
+		/tmp/* \
+		~/.cargo \
+	        /usr/.crates.toml \
+	        /usr/.crates2.json
 
 # Copy root filesystem
 COPY rootfs /

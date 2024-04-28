@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.0
+
+- Add support for DLNA Media Renderer: Connect Homeassitant with snapcast through DLNA
+
 ## 0.2.1
 
 - Wait before starting snapcast-client until snapcast-server is started. 

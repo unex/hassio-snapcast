@@ -18,8 +18,8 @@ RUN \
         gcc \
         g++ \
         make \
-        cmake \
-        rust-bindgen
+        cmake
+        #rust-bindgen
 RUN \
 	apk add --no-cache \
         dbus \
@@ -44,18 +44,19 @@ RUN \
         gst-libav \
         gstreamer-dev \
         gstreamer-tools
-RUN \
-	cargo install \
-        --locked \
-        --no-default-features \
-        --features with-dns-sd \
-        --root /usr \
-        --bin librespot \
-        --version 0.6.0 \
-        --verbose \
-        -- librespot bindgen-cli
 
-RUN apk add --no-cache snapweb
+        # RUN \
+# 	cargo install \
+#         --locked \
+#         --no-default-features \
+#         --features with-dns-sd \
+#         --root /usr \
+#         --bin librespot \
+#         --version 0.6.0 \
+#         --verbose \
+#         -- librespot
+
+RUN apk add --no-cache snapweb librespot --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 RUN \
         addgroup root audio

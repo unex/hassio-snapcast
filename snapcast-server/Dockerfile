@@ -57,7 +57,6 @@ RUN \
 #         -- librespot
 
 RUN apk add --no-cache librespot --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
-RUN apk add --no-cache snapweb --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 RUN \
         addgroup root audio

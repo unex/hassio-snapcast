@@ -32,25 +32,24 @@ done
 # Add the Spotify source
 device_name=$(bashio::config 'spotify_name')
 spotify_auth=""
-if bashio::config.has_value 'spotify_username'; then
-    bashio::config.require 'spotify_password'
+if bashio::config.has_value 'spotify_token'; then
 
-    username=$(bashio::config 'spotify_username')
-    password=$(bashio::config 'spotify_password')
-
-    spotify_auth="&username=${username}&password=${password}"
+    token=$(bashio::config 'spotify_token')
+    spotify_auth="&access_token=${token}&password=${password}"
 fi
 
 {
-    echo "source = librespot:///usr/bin/librespot?name=Spotify&devicename="${device_name}"${spotify_auth}&disable_audio_cache=true"
+    echo "source = librespot:///usr/bin/librespot?name=Spotify&devicename="${device_name}"${spotify_auth}&disable_audio_cache=true&cache=/data/spot"
     echo "buffer = $(bashio::config 'buffer')"
     echo "codec = $(bashio::config 'codec')"
     echo "send_to_muted = $(bashio::config 'send_to_muted')"
     echo "sampleformat = $(bashio::config 'sampleformat')"
     echo "chunk_ms = $(bashio::config 'chunk_ms')"
     echo "[http]"
-    echo "doc_root = /usr/share/snapserver/snapweb"
+    echo "doc_root = /usr/share/snapweb"
 } >> "${config}"
+
+bashio::log.debug "SnapServer Config: $(cat ${config})"
 
 # Configure snapweb
 cat <<EOT > /usr/share/snapserver/snapweb/config.js

@@ -1,5 +1,5 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.3
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:16.3.4
 FROM $BUILD_FROM
 
 # See https://github.com/librespot-org/librespot/wiki/Compiling#addition-features for librespot compile features.
@@ -17,7 +17,8 @@ RUN \
         pkgconf \  
         gcc \
         g++ \
-        make
+        make \
+        cmake
 RUN \
 	apk add --no-cache \
         dbus \
@@ -49,9 +50,12 @@ RUN \
         --features with-dns-sd \
         --root /usr \
         --bin librespot \
-        --version 0.4.2 \
+        --version 0.6.0 \
         --verbose \
         -- librespot
+
+RUN apk add --no-cache snapweb
+
 RUN \
         addgroup root audio
 RUN \
@@ -75,6 +79,9 @@ RUN \
         mkdir -p /var/run/dbus
         # && touch /var/run/dbus/system_bus_socket
 
+# https://stackoverflow.com/a/75295879 dbus daemon slow start fix
+RUN sed -i 's/ systemd//g' /etc/nsswitch.conf
+
 # Copy root filesystem
 COPY rootfs /
 
@@ -94,11 +101,11 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="corneyl" \
+    maintainer="DjFabFab" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="Corneyl's addons" \
-    org.opencontainers.image.authors="corneyl" \
+    org.opencontainers.image.vendor="DjFabFab's addons" \
+    org.opencontainers.image.authors="DjFabFab" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://github.com/${BUILD_REPOSITORY}" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \

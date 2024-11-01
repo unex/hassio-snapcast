@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.4.0
+
+- Dependcy Updates. Please migrate to libresport / Spotify token auth.
+
 ## 0.3.0
 
 - Add support for DLNA Media Renderer: Connect Homeassitant with snapcast through DLNA

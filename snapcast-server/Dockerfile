@@ -18,7 +18,8 @@ RUN \
         gcc \
         g++ \
         make \
-        cmake
+        cmake \
+        rust-bindgen
 RUN \
 	apk add --no-cache \
         dbus \
@@ -52,7 +53,7 @@ RUN \
         --bin librespot \
         --version 0.6.0 \
         --verbose \
-        -- librespot
+        -- librespot bindgen-cli
 
 RUN apk add --no-cache snapweb
 

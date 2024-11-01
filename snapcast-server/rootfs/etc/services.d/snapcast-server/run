@@ -35,7 +35,7 @@ spotify_auth=""
 if bashio::config.has_value 'spotify_token'; then
 
     token=$(bashio::config 'spotify_token')
-    spotify_auth="&access_token=${token}&password=${password}"
+    spotify_auth="&access_token=${token}"
 fi
 
 {

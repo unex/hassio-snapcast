@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.4.1
+
+- Fix snapweb. Drop support for 32bit platforms
+
 ## 0.4.0
 
 - Dependcy Updates. Please migrate to libresport / Spotify token auth.

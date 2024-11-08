@@ -14,7 +14,7 @@ RUN \
         autoconf \
         automake \
         libtool \
-        pkgconf \  
+        pkgconf \
         gcc \
         g++ \
         make \
@@ -104,11 +104,11 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="DjFabFab" \
+    maintainer="unex" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="DjFabFab's addons" \
-    org.opencontainers.image.authors="DjFabFab" \
+    org.opencontainers.image.vendor="unex's addons" \
+    org.opencontainers.image.authors="unex" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://github.com/${BUILD_REPOSITORY}" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
